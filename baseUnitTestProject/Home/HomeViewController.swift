@@ -7,45 +7,57 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController, UITableViewDelegate {
     // MARK: Properties
-    var dataSource: [String]?
+    let homeTableViewDataSource: HomeTableViewDataSourceProtocol
 
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: Initialization
+    init(dataSource: HomeTableViewDataSourceProtocol = HomeTableViewDataSource()) {
+        self.homeTableViewDataSource = dataSource
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
         setupTableView()
-        populateDataSource()
+        populateTableViewData()
     }
     
     // MARK: Methods
-    private func setupTableView() {
+    func setupTableView() {
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = homeTableViewDataSource
         tableView.register(UINib(nibName: HomeTableViewCell.identifier, bundle: nil),
                            forCellReuseIdentifier: HomeTableViewCell.identifier)
     }
     
-    private func populateDataSource() {
-        dataSource = ["Primeiro item", "Segundo item", "Terceiro item", "Quarto item", "Quinto item", "Sexto item", "Setimo item"]
+    private func populateTableViewData() {
+        let data = ["Primeiro item", "Segundo item", "Terceiro item", "Quarto item", "Quinto item", "Sexto item", "Setimo item"]
+        homeTableViewDataSource.data = data
         tableView.reloadData()
     }
 }
 
-// MARK: Extensions
-extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+// MARK: Data Sorce object
+final class HomeTableViewDataSource: NSObject, HomeTableViewDataSourceProtocol {
+    var data: [String]?
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSource?.count ?? 0
+        data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as? HomeTableViewCell,
-              let dataSource = dataSource else { return UITableViewCell() }
-        cell.labelCell.text = dataSource[indexPath.row]
+              let data = data else { return UITableViewCell() }
+        cell.labelCell.text = data[indexPath.row]
         return cell
     }
 }
