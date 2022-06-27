@@ -9,6 +9,7 @@ import UIKit
 
 final class HomeViewController: UIViewController, UITableViewDelegate {
     // MARK: Properties
+    var data: [String]?
     let homeTableViewDataSource: HomeTableViewDataSourceProtocol
 
     // MARK: Outlets
@@ -28,7 +29,6 @@ final class HomeViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        populateTableViewData()
     }
     
     // MARK: Methods
@@ -39,8 +39,7 @@ final class HomeViewController: UIViewController, UITableViewDelegate {
                            forCellReuseIdentifier: HomeTableViewCell.identifier)
     }
     
-    private func populateTableViewData() {
-        let data = ["Primeiro item", "Segundo item", "Terceiro item", "Quarto item", "Quinto item", "Sexto item", "Setimo item"]
+    func populateTableViewData() {
         homeTableViewDataSource.data = data
         tableView.reloadData()
     }
