@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController, UITableViewDelegate {
+protocol HomeTableViewDataSourceProtocol: UITableViewDataSource {
+    var data: [String]? { get set }
+}
+
+class HomeViewController: UIViewController, UITableViewDelegate {
     // MARK: Properties
     var data: [String]?
     let homeTableViewDataSource: HomeTableViewDataSourceProtocol
@@ -29,6 +33,7 @@ final class HomeViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        updateTableView()
     }
     
     // MARK: Methods
@@ -39,13 +44,13 @@ final class HomeViewController: UIViewController, UITableViewDelegate {
                            forCellReuseIdentifier: HomeTableViewCell.identifier)
     }
     
-    func populateTableViewData() {
+    func updateTableView() {
         homeTableViewDataSource.data = data
         tableView.reloadData()
     }
 }
 
-// MARK: Data Sorce object
+// MARK: TableViewDataSource Object
 final class HomeTableViewDataSource: NSObject, HomeTableViewDataSourceProtocol {
     var data: [String]?
     
