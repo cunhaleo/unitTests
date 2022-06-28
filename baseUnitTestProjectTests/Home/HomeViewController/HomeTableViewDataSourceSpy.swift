@@ -22,7 +22,7 @@ final class HomeTableViewDataSourceSpy: NSObject, HomeTableViewDataSourceProtoco
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         numberOfRowsCalled = true
         numberOfRowsCallCount += 1
-        return data?.count ?? 0
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

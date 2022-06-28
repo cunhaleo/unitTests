@@ -38,7 +38,7 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     
     // MARK: Methods
     func setupTableView() {
-        tableView.delegate = self
+        tableView.delegate = self // MARK: testar
         tableView.dataSource = homeTableViewDataSource
         tableView.register(UINib(nibName: HomeTableViewCell.identifier, bundle: nil),
                            forCellReuseIdentifier: HomeTableViewCell.identifier)

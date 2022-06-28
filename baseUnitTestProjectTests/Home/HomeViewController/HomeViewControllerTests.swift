@@ -22,6 +22,14 @@ final class HomeViewControllerTests: XCTestCase {
         XCTAssertTrue(homeDataSourceClass == sutDataSourceDefaultClass)
     }
     
+    func test_homeViewController_shouldBeTableViewDelegate() {
+        // when
+        _ = sut.view
+        
+        // then
+        XCTAssertTrue(sut.tableView.delegate === sut)
+    }
+    
     func test_whenHomeViewControllerLoads_tableViewShouldExist() {
         // when
         _ = sut.view
@@ -30,7 +38,7 @@ final class HomeViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut.tableView)
     }
     
-    func test_whenTableViewLoads_numberOfRowsMethodShouldBeCalledOnce() {
+    func test_whenHomeViewControllerLoads_numberOfRowsMethodShouldBeCalledOnce() {
         // given
         let dataSourceSpy = HomeTableViewDataSourceSpy()
         let sut = HomeViewController(dataSource: dataSourceSpy)
@@ -42,23 +50,10 @@ final class HomeViewControllerTests: XCTestCase {
         XCTAssertEqual(dataSourceSpy.numberOfRowsCallCount, 1)
     }
     
-    func test_givenTableViewWasLoaded_whenUpdateTableViewIsCalled_numberOfRowsMethodShouldBeCalledAgain() {
-        // given
-        let dataSourceSpy = HomeTableViewDataSourceSpy()
-        let sut = HomeViewController(dataSource: dataSourceSpy)
-        _ = sut.view
-        
-        // when
-        sut.updateTableView()
-        
-        // then
-        XCTAssertEqual(dataSourceSpy.numberOfRowsCallCount, 2)
-    }
-    
     func test_whenUpdateTableViewIsCalled_dataSourceObjectShouldReceiveHomeViewControllersData() {
         // given
-        let dataSourceSpy = HomeTableViewDataSourceSpy()
-        let sut = HomeViewController(dataSource: dataSourceSpy)
+        let dataSource = HomeTableViewDataSource()
+        let sut = HomeViewController(dataSource: dataSource)
         let data = ["Primeiro item", "Segundo item", "Terceiro item"]
         
         // when
@@ -67,19 +62,11 @@ final class HomeViewControllerTests: XCTestCase {
         sut.updateTableView()
         
         // then
-        XCTAssertEqual(data, dataSourceSpy.data)
-    }
-    
-    func test_tableView_initialNumberOfSectionsShouldBeOne() {
-        //given
-        _ = sut.view
-        let numberOfSections = sut.tableView.numberOfSections
-        
-        XCTAssertEqual(numberOfSections, 1)
+        XCTAssertEqual(data, dataSource.data)
     }
     
     func test_tableView_numberOfSectionsShouldBeOne() {
-        //given
+        // given
         _ = sut.view
         let numberOfSections = sut.tableView.numberOfSections
         
@@ -87,24 +74,69 @@ final class HomeViewControllerTests: XCTestCase {
     }
     
     func test_tableView_initialNumberOfRowsShouldBeZero() {
-        //given
+        // given
         _ = sut.view
         let numberOfRows = sut.tableView.numberOfRows(inSection: 0)
         
         XCTAssertEqual(numberOfRows, 0)
     }
     
-    func test_tableView_numberOfRowsShouldBeEqualToControllersDataSize() {
+    func test_tableView_whenUpdateTableViewIsCalled_numberOfRowsShouldBeEqualToControllersDataSize() {
         // given
         _ = sut.view
+        let data = ["0", "1", "2", "3", "4"]
         
         // when
-        sut.data = ["0", "1", "2"]
+        sut.data = data
         sut.updateTableView()
         
         // then
         let numberOfRows = sut.tableView.numberOfRows(inSection: 0)
+        XCTAssertEqual(numberOfRows, data.count)
+    }
+    
+    func test_tableView_whenDataIsNotNil_cellShouldBeAHomeTableViewCell() {
+        // given
+        let data = ["Primeiro item", "Segundo item", "Terceiro item"]
+        sut.data = data
         
-        XCTAssertEqual(numberOfRows, 3)
+        // when
+        _ = sut.view
+        sut.updateTableView()
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = sut.tableView.cellForRow(at: indexPath)
+        
+        // then
+        XCTAssertEqual(cell?.reuseIdentifier, HomeTableViewCell.identifier)
+    }
+    
+    func test_tableView_whenDataIsNotNil_fisrtCellShouldShouldReceiveFirstStringFromData() {
+        // given
+        let data = ["Primeiro item", "Segundo item", "Terceiro item"]
+        sut.data = data
+        
+        // when
+        _ = sut.view
+        sut.updateTableView()
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = sut.tableView.cellForRow(at: indexPath) as? HomeTableViewCell
+        
+        // then
+        XCTAssertEqual(cell?.labelCell?.text, data.first)
+    }
+    
+    func test_tableView_whenDataIsNotNil_lastCellShouldReceiveLastItemFromData() {
+        // given
+        let data = ["Primeiro item", "Segundo item", "Terceiro item"]
+        sut.data = data
+        
+        // when
+        _ = sut.view
+        sut.updateTableView()
+        let indexPath = IndexPath(row: data.count-1, section: 0)
+        let cell = sut.tableView.cellForRow(at: indexPath) as? HomeTableViewCell
+        
+        // then
+        XCTAssertEqual(cell?.labelCell?.text, data.last)
     }
 }
