@@ -10,6 +10,9 @@ import XCTest
 
 final class HomeViewControllerTests: XCTestCase {
     let sut = HomeViewController()
+    let dataSource = HomeTableViewDataSource()
+    let viewModelSpy = HomeViewModelSpy()
+    let dataSourceSpy = HomeTableViewDataSourceSpy()
     
     func test_whenInstantiateHomeViewController_shouldSetHomeTableViewDataSourceAsDefaultDataSource() {
         // given
@@ -39,8 +42,7 @@ final class HomeViewControllerTests: XCTestCase {
     
     func test_whenHomeViewControllerLoads_numberOfRowsMethodShouldBeCalledOnce() {
         // given
-        let dataSourceSpy = HomeTableViewDataSourceSpy()
-        let sut = HomeViewController(dataSource: dataSourceSpy)
+        let sut = HomeViewController(dataSource: dataSourceSpy, viewModel: viewModelSpy)
         
         // when
         _ = sut.view
@@ -51,9 +53,9 @@ final class HomeViewControllerTests: XCTestCase {
     
     func test_whenUpdateTableViewIsCalled_dataSourceObjectShouldReceiveHomeViewControllersData() {
         // given
-        let dataSource = HomeTableViewDataSource()
-        let sut = HomeViewController(dataSource: dataSource)
+        let sut = HomeViewController(dataSource: dataSource, viewModel: viewModelSpy)
         let persons: [Person] = [.fixture(), .fixture(), .fixture()]
+        viewModelSpy.dataToBeReturned = persons
         
         // when
         sut.persons = persons
@@ -79,10 +81,11 @@ final class HomeViewControllerTests: XCTestCase {
         XCTAssertEqual(numberOfRows, 0)
     }
     
-    func test_tableView_whenUpdateTableViewIsCalled_numberOfRowsShouldBeEqualToControllersDataArraySize() {
+    func test_tableView_whenViewModelReturnsPersonsData_numberOfRowsShouldBeEqualToControllersDataArraySize() {
         // given
+        let sut = HomeViewController(dataSource: dataSource, viewModel: viewModelSpy)
         let persons: [Person] = [.fixture(), .fixture(), .fixture()]
-        sut.persons = persons
+        viewModelSpy.dataToBeReturned = persons
         
         // when
         _ = sut.view
@@ -95,8 +98,9 @@ final class HomeViewControllerTests: XCTestCase {
     
     func test_tableView_whenDataIsNotNil_cellShouldBeAHomeTableViewCell() {
         // given
+        let sut = HomeViewController(dataSource: dataSource, viewModel: viewModelSpy)
         let persons: [Person] = [.fixture(), .fixture(), .fixture()]
-        sut.persons = persons
+        viewModelSpy.dataToBeReturned = persons
         
         // when
         _ = sut.view

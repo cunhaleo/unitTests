@@ -15,14 +15,14 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     // MARK: Properties
     var persons: [Person]?
     let homeTableViewDataSource: HomeTableViewDataSourceProtocol
-    let viewModel: HomeViewModel
+    let viewModel: HomeViewModelProtocol
 
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Initialization
     init(dataSource: HomeTableViewDataSourceProtocol = HomeTableViewDataSource(),
-         viewModel: HomeViewModel = HomeViewModel()) {
+         viewModel: HomeViewModelProtocol = HomeViewModel()) {
         self.homeTableViewDataSource = dataSource
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -36,7 +36,7 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        bindEvents()
+        getPersons()
     }
     
     // MARK: Methods
@@ -47,8 +47,8 @@ class HomeViewController: UIViewController, UITableViewDelegate {
                            forCellReuseIdentifier: HomeTableViewCell.identifier)
     }
     
-    private func bindEvents() {
-        viewModel.service { persons in
+    private func getPersons() {
+        viewModel.getPersons { persons in
             self.homeTableViewDataSource.persons = persons
             self.tableView.reloadData()
         }

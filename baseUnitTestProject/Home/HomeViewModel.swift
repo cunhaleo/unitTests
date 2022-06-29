@@ -7,11 +7,22 @@
 
 import Foundation
 
-final class HomeViewModel {
-    var dataToBeReturned: [Person]?
+protocol HomeViewModelProtocol {
+    func getPersons(completion: @escaping (([Person]?) -> Void))
+}
+
+final class HomeViewModel: HomeViewModelProtocol {
     
-    func service(completion: @escaping (([Person]?) -> Void)) {
-        completion(dataToBeReturned)
+    func getPersons(completion: @escaping (([Person]?) -> Void)) {
+        let url = URL(string: "someURLString")!
+        let request = URLRequest(url: url)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil,
+            let data = data else { return }
+            
+            if let persons = try? JSONDecoder().decode([Person].self, from: data) {
+                completion(persons)
+            }
+        }
     }
-    
 }
