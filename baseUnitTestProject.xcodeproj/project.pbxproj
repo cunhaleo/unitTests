@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		FC0C4079286A3C770013BA8A /* HomeTableViewDataSourceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C40712869F1F00013BA8A /* HomeTableViewDataSourceSpy.swift */; };
+		FC2D46D1286C9C4000B424F0 /* Person+Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46D0286C9C4000B424F0 /* Person+Fixture.swift */; };
+		FC2D46D4286C9C5000B424F0 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46D3286C9C5000B424F0 /* Person.swift */; };
+		FC2D46D6286CB02C00B424F0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46D5286CB02C00B424F0 /* HomeViewModel.swift */; };
 		FC3DF51C2865FAEB00B15B9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3DF51B2865FAEB00B15B9F /* AppDelegate.swift */; };
 		FC3DF51E2865FAEB00B15B9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3DF51D2865FAEB00B15B9F /* SceneDelegate.swift */; };
 		FC3DF5252865FAED00B15B9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC3DF5242865FAED00B15B9F /* Assets.xcassets */; };
@@ -31,6 +34,9 @@
 
 /* Begin PBXFileReference section */
 		FC0C40712869F1F00013BA8A /* HomeTableViewDataSourceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewDataSourceSpy.swift; sourceTree = "<group>"; };
+		FC2D46D0286C9C4000B424F0 /* Person+Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+Fixture.swift"; sourceTree = "<group>"; };
+		FC2D46D3286C9C5000B424F0 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		FC2D46D5286CB02C00B424F0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FC3DF5182865FAEB00B15B9F /* baseUnitTestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseUnitTestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3DF51B2865FAEB00B15B9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC3DF51D2865FAEB00B15B9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,18 +85,20 @@
 			path = HomeViewController;
 			sourceTree = "<group>";
 		};
-		FC0C4078286A3C570013BA8A /* HomeTableViewDataSource */ = {
+		FC2D46CF286C9C2C00B424F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FC2D46D0286C9C4000B424F0 /* Person+Fixture.swift */,
 			);
-			path = HomeTableViewDataSource;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		FC0C407E286B7FD60013BA8A /* Button */ = {
+		FC2D46D2286C9C4700B424F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FC2D46D3286C9C5000B424F0 /* Person.swift */,
 			);
-			path = Button;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FC3DF50F2865FAEB00B15B9F = {
@@ -117,7 +125,6 @@
 				FC0C4074286A1B160013BA8A /* Util */,
 				FC3DF54C2866083A00B15B9F /* Resources */,
 				FC3DF54B2866083200B15B9F /* Sources */,
-				FC0C407E286B7FD60013BA8A /* Button */,
 				FC3DF538286603E000B15B9F /* Home */,
 			);
 			path = baseUnitTestProject;
@@ -126,6 +133,8 @@
 		FC3DF538286603E000B15B9F /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				FC2D46D2286C9C4700B424F0 /* Model */,
+				FC2D46D5286CB02C00B424F0 /* HomeViewModel.swift */,
 				FC3DF5332866029400B15B9F /* HomeViewController.swift */,
 				FC3DF5342866029400B15B9F /* HomeViewController.xib */,
 				FC3DF539286604F600B15B9F /* Cell */,
@@ -172,7 +181,7 @@
 		FC3DF54D286608A100B15B9F /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				FC0C4078286A3C570013BA8A /* HomeTableViewDataSource */,
+				FC2D46CF286C9C2C00B424F0 /* Model */,
 				FC0C4077286A3C440013BA8A /* HomeViewController */,
 			);
 			path = Home;
@@ -280,6 +289,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC2D46D4286C9C5000B424F0 /* Person.swift in Sources */,
+				FC2D46D6286CB02C00B424F0 /* HomeViewModel.swift in Sources */,
 				FC3DF51C2865FAEB00B15B9F /* AppDelegate.swift in Sources */,
 				FC3DF51E2865FAEB00B15B9F /* SceneDelegate.swift in Sources */,
 				FC3DF53C2866051200B15B9F /* HomeTableViewCell.swift in Sources */,
@@ -293,6 +304,7 @@
 			files = (
 				FC3DF5452866081E00B15B9F /* HomeViewControllerTests.swift in Sources */,
 				FC0C4079286A3C770013BA8A /* HomeTableViewDataSourceSpy.swift in Sources */,
+				FC2D46D1286C9C4000B424F0 /* Person+Fixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

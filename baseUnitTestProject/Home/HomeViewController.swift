@@ -8,20 +8,23 @@
 import UIKit
 
 protocol HomeTableViewDataSourceProtocol: UITableViewDataSource {
-    var data: [String]? { get set }
+    var persons: [Person]? { get set }
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate {
     // MARK: Properties
-    var data: [String]?
+    var persons: [Person]?
     let homeTableViewDataSource: HomeTableViewDataSourceProtocol
+    let viewModel: HomeViewModel
 
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Initialization
-    init(dataSource: HomeTableViewDataSourceProtocol = HomeTableViewDataSource()) {
+    init(dataSource: HomeTableViewDataSourceProtocol = HomeTableViewDataSource(),
+         viewModel: HomeViewModel = HomeViewModel()) {
         self.homeTableViewDataSource = dataSource
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,35 +36,38 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        updateTableView()
+        bindEvents()
     }
     
     // MARK: Methods
-    func setupTableView() {
-        tableView.delegate = self // MARK: testar
+    private func setupTableView() {
+        tableView.delegate = self
         tableView.dataSource = homeTableViewDataSource
         tableView.register(UINib(nibName: HomeTableViewCell.identifier, bundle: nil),
                            forCellReuseIdentifier: HomeTableViewCell.identifier)
     }
     
-    func updateTableView() {
-        homeTableViewDataSource.data = data
-        tableView.reloadData()
+    private func bindEvents() {
+        viewModel.service { persons in
+            self.homeTableViewDataSource.persons = persons
+            self.tableView.reloadData()
+        }
     }
 }
 
 // MARK: TableViewDataSource Object
 final class HomeTableViewDataSource: NSObject, HomeTableViewDataSourceProtocol {
-    var data: [String]?
+    var persons: [Person]?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data?.count ?? 0
+        persons?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as? HomeTableViewCell,
-              let data = data else { return UITableViewCell() }
-        cell.labelCell.text = data[indexPath.row]
+              let persons = persons else { return UITableViewCell() }
+        let person = persons[indexPath.row]
+        cell.setupCell(with: person)
         return cell
     }
 }

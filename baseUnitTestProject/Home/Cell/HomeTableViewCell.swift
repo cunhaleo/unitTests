@@ -13,4 +13,8 @@ final class HomeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelCell: UILabel!
     
+    func setupCell(with person: Person) {
+        labelCell.text = "Name: \(person.name), Age: \(person.age.description), Height: \(person.height.description)"
+    }
+    
 }

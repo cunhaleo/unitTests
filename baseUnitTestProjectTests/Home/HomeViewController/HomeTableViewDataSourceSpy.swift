@@ -10,7 +10,7 @@ import UIKit
 
 final class HomeTableViewDataSourceSpy: NSObject, HomeTableViewDataSourceProtocol {
     // MARK: Properties
-    var data: [String]?
+    var persons: [Person]?
         
     private(set) var numberOfRowsCalled: Bool = false
     private(set) var numberOfRowsCallCount: Int = 0
