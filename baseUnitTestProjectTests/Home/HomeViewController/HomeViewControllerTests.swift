@@ -19,6 +19,12 @@ final class HomeViewControllerTests: XCTestCase {
     let viewModelSpy = HomeViewModelSpy()
     let dataSourceSpy = HomeTableViewDataSourceSpy()
     
+    func test_initHomeViewControllerWithCoder_shouldReturnNil() {
+        let archiver = NSKeyedArchiver(requiringSecureCoding: true)
+        let sut = HomeViewController(coder: archiver)
+        XCTAssertNil(sut)
+    }
+    
     func test_whenInstantiateHomeViewController_shouldSetHomeTableViewDataSourceAsDefaultDataSource() {
         
         guard sut.homeTableViewDataSource is HomeTableViewDataSource else {
