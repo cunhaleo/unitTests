@@ -12,6 +12,8 @@
 		FC2D46D4286C9C5000B424F0 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46D3286C9C5000B424F0 /* Person.swift */; };
 		FC2D46D8286CBF1700B424F0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46D7286CBF1700B424F0 /* HomeViewModel.swift */; };
 		FC2D46D9286CC12200B424F0 /* HomeViewModelSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46D5286CB02C00B424F0 /* HomeViewModelSpy.swift */; };
+		FC2D46DF286CDB6A00B424F0 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46DE286CDB6A00B424F0 /* HomeViewControllerTests.swift */; };
+		FC2D46E3286CDB8400B424F0 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46E2286CDB8400B424F0 /* HomeViewControllerTests.swift */; };
 		FC3DF51C2865FAEB00B15B9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3DF51B2865FAEB00B15B9F /* AppDelegate.swift */; };
 		FC3DF51E2865FAEB00B15B9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3DF51D2865FAEB00B15B9F /* SceneDelegate.swift */; };
 		FC3DF5252865FAED00B15B9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC3DF5242865FAED00B15B9F /* Assets.xcassets */; };
@@ -20,7 +22,6 @@
 		FC3DF5362866029400B15B9F /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC3DF5342866029400B15B9F /* HomeViewController.xib */; };
 		FC3DF53C2866051200B15B9F /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3DF53A2866051200B15B9F /* HomeTableViewCell.swift */; };
 		FC3DF53D2866051200B15B9F /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC3DF53B2866051200B15B9F /* HomeTableViewCell.xib */; };
-		FC3DF5452866081E00B15B9F /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3DF5442866081E00B15B9F /* HomeViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,8 @@
 		FC2D46D3286C9C5000B424F0 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		FC2D46D5286CB02C00B424F0 /* HomeViewModelSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelSpy.swift; sourceTree = "<group>"; };
 		FC2D46D7286CBF1700B424F0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FC2D46DE286CDB6A00B424F0 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
+		FC2D46E2286CDB8400B424F0 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 		FC3DF5182865FAEB00B15B9F /* baseUnitTestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseUnitTestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3DF51B2865FAEB00B15B9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC3DF51D2865FAEB00B15B9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +53,6 @@
 		FC3DF53A2866051200B15B9F /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		FC3DF53B2866051200B15B9F /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		FC3DF5422866081E00B15B9F /* baseUnitTestProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baseUnitTestProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC3DF5442866081E00B15B9F /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +85,8 @@
 			children = (
 				FC2D46D5286CB02C00B424F0 /* HomeViewModelSpy.swift */,
 				FC0C40712869F1F00013BA8A /* HomeTableViewDataSourceSpy.swift */,
-				FC3DF5442866081E00B15B9F /* HomeViewControllerTests.swift */,
+				FC2D46E2286CDB8400B424F0 /* HomeViewControllerTests.swift */,
+				FC2D46DE286CDB6A00B424F0 /* HomeViewControllerTests.swift */,
 			);
 			path = HomeViewController;
 			sourceTree = "<group>";
@@ -305,7 +308,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC3DF5452866081E00B15B9F /* HomeViewControllerTests.swift in Sources */,
+				FC2D46E3286CDB8400B424F0 /* HomeViewControllerTests.swift in Sources */,
+				FC2D46DF286CDB6A00B424F0 /* HomeViewControllerTests.swift in Sources */,
 				FC0C4079286A3C770013BA8A /* HomeTableViewDataSourceSpy.swift in Sources */,
 				FC2D46D9286CC12200B424F0 /* HomeViewModelSpy.swift in Sources */,
 				FC2D46D1286C9C4000B424F0 /* Person+Fixture.swift in Sources */,

@@ -9,38 +9,35 @@ import XCTest
 @testable import baseUnitTestProject
 
 final class HomeViewControllerTests: XCTestCase {
-    let sut = HomeViewController()
+    private lazy var sut: HomeViewController = {
+        let sut = HomeViewController()
+        _ = sut.view
+        return sut
+    }()
+    
     let dataSource = HomeTableViewDataSource()
     let viewModelSpy = HomeViewModelSpy()
     let dataSourceSpy = HomeTableViewDataSourceSpy()
     
     func test_whenInstantiateHomeViewController_shouldSetHomeTableViewDataSourceAsDefaultDataSource() {
-        // given
-        let homeDataSourceClass = object_getClassName(HomeTableViewDataSource())
-        let sutDataSource = sut.homeTableViewDataSource
-        let sutDataSourceDefaultClass = object_getClassName(sutDataSource)
         
-        // then
-        XCTAssertTrue(homeDataSourceClass == sutDataSourceDefaultClass)
+        guard sut.homeTableViewDataSource is HomeTableViewDataSource else {
+            XCTFail()
+            return
+        }
     }
     
     func test_homeViewController_shouldBeTableViewDelegate() {
-        // when
-        _ = sut.view
-        
-        // then
+
         XCTAssertTrue(sut.tableView.delegate === sut)
     }
     
     func test_whenHomeViewControllerLoads_tableViewShouldExist() {
-        // when
-        _ = sut.view
-        
-        // then
+
         XCTAssertNotNil(sut.tableView)
     }
     
-    func test_whenHomeViewControllerLoads_numberOfRowsMethodShouldBeCalledOnce() {
+    func test_whenHomeViewControllerLoads_whenViewModelReturnsData_numberOfRowsMethodShouldBeCalledOnce() {
         // given
         let sut = HomeViewController(dataSource: dataSourceSpy, viewModel: viewModelSpy)
         
@@ -65,38 +62,47 @@ final class HomeViewControllerTests: XCTestCase {
         XCTAssertEqual(persons, dataSource.persons)
     }
     
-    func test_tableView_numberOfSectionsShouldBeOne() {
-        // given
-        _ = sut.view
+    func test_tableView_whenDataIsNil_numberOfSectionsShouldBeOne() {
+
         let numberOfSections = sut.tableView.numberOfSections
-        
         XCTAssertEqual(numberOfSections, 1)
     }
     
-    func test_tableView_initialNumberOfRowsShouldBeZero() {
-        // given
-        _ = sut.view
+    func test_tableView_whenDataIsNil_numberOfRowsShouldBeZero() {
+
         let numberOfRows = sut.tableView.numberOfRows(inSection: 0)
-        
         XCTAssertEqual(numberOfRows, 0)
     }
     
-    func test_tableView_whenViewModelReturnsPersonsData_numberOfRowsShouldBeEqualToControllersDataArraySize() {
+    func test_tableView_whenViewModelReturnsData_numberOfSectionsShouldBeOne() {
         // given
-        let sut = HomeViewController(dataSource: dataSource, viewModel: viewModelSpy)
+        let sut = HomeViewController(viewModel: viewModelSpy)
         let persons: [Person] = [.fixture(), .fixture(), .fixture()]
         viewModelSpy.dataToBeReturned = persons
         
         // when
         _ = sut.view
-        sut.viewDidLoad()
+        
+        // then
+        let numberOfSections = sut.tableView.numberOfSections
+        XCTAssertEqual(numberOfSections, 1)
+    }
+    
+    func test_tableView_whenViewModelReturnsData_numberOfRowsShouldBeEqualToControllersDataArraySize() {
+        // given
+        let sut = HomeViewController(viewModel: viewModelSpy)
+        let persons: [Person] = [.fixture(), .fixture(), .fixture()]
+        viewModelSpy.dataToBeReturned = persons
+        
+        // when
+        _ = sut.view
         
         // then
         let numberOfRows = sut.tableView.numberOfRows(inSection: 0)
         XCTAssertEqual(numberOfRows, persons.count)
     }
     
-    func test_tableView_whenDataIsNotNil_cellShouldBeAHomeTableViewCell() {
+    func test_tableView_whenViewModelReturnsData_cellShouldBeAHomeTableViewCell() {
         // given
         let sut = HomeViewController(dataSource: dataSource, viewModel: viewModelSpy)
         let persons: [Person] = [.fixture(), .fixture(), .fixture()]
