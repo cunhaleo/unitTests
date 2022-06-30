@@ -16,5 +16,4 @@ final class HomeTableViewCell: UITableViewCell {
     func setupCell(with person: Person) {
         labelCell.text = "Name: \(person.name), Age: \(person.age.description), Height: \(person.height.description)"
     }
-    
 }

@@ -76,11 +76,7 @@ final class HomeViewControllerTests: XCTestCase {
         let indexPath = IndexPath(row: 0, section: 0)
         let cell = sut.tableView.cellForRow(at: indexPath)
         
-        // then
-        guard cell is HomeTableViewCell else {
-            XCTFail("Cell is not a HomeTableViewCell")
-            return
-        }
+        XCTAssertTrue(cell is HomeTableViewCell)
         XCTAssertEqual(cell?.reuseIdentifier, "HomeTableViewCell")
     }
     
@@ -100,5 +96,36 @@ final class HomeViewControllerTests: XCTestCase {
         
         // then
         XCTAssertEqual(cell.labelCell.text, "Name: Leo Cunha, Age: 27, Height: 1.81")
+    }
+    
+    func test_didSelectRowAt_shouldPushADetailsViewController() {
+        let sut = HomeViewController(viewModel: viewModelSpy)
+        viewModelSpy.dataToBeReturned = [.fixture()]
+        _ = sut.view
+
+        let navigationSpy = NavigationControllerSpy(rootViewController: sut)
+        let indexPath = IndexPath(row: 0, section: 0)
+        sut.tableView(sut.tableView, didSelectRowAt: indexPath)
+        
+        XCTAssertTrue(navigationSpy.pushedViewController is DetailsViewController)
+    }
+    
+    func test_didSelectRowAt_pushedDetailsViewControllerShouldReceiveSelectedPerson() {
+        let sut = HomeViewController(viewModel: viewModelSpy)
+        viewModelSpy.dataToBeReturned = [.fixture(name: "Joao", age: 32), .fixture(), .fixture(), .fixture()]
+        
+        let navigationSpy = NavigationControllerSpy(rootViewController: sut)
+        _ = sut.view
+        let indexPath = IndexPath(row: 0, section: 0)
+        sut.tableView(sut.tableView, didSelectRowAt: indexPath)
+        sut.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        
+        guard let detailsViewController = navigationSpy.pushedViewController as? DetailsViewController else {
+            XCTFail("Did not push a DetailsViewController")
+            return
+        }
+        
+        let detailsPerson = detailsViewController.person
+        XCTAssertEqual(detailsPerson, Person.fixture(name: "Joao", age: 32))
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate {
+final class HomeViewController: UIViewController {
     // MARK: Properties
     var persons: [Person]?
     let viewModel: HomeViewModelProtocol
@@ -48,9 +48,8 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     }
 }
 
-// MARK: Extension
+// MARK: Data Source
 extension HomeViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         persons?.count ?? 0
     }
@@ -61,5 +60,15 @@ extension HomeViewController: UITableViewDataSource {
         let person = persons[indexPath.row]
         cell.setupCell(with: person)
         return cell
+    }
+}
+
+// MARK: Delegate
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let person = persons?[indexPath.row] {
+            let detailsViewController = DetailsViewController(person: person)
+            navigationController?.pushViewController(detailsViewController, animated: true)
+        }
     }
 }
