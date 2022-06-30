@@ -17,7 +17,6 @@ final class HomeViewControllerTests: XCTestCase {
     
     let dataSource = HomeTableViewDataSource()
     let viewModelSpy = HomeViewModelSpy()
-    let dataSourceSpy = HomeTableViewDataSourceSpy()
     
     func test_initHomeViewControllerWithCoder_shouldReturnNil() {
         let archiver = NSKeyedArchiver(requiringSecureCoding: true)
@@ -41,17 +40,6 @@ final class HomeViewControllerTests: XCTestCase {
     func test_whenHomeViewControllerLoads_tableViewShouldExist() {
 
         XCTAssertNotNil(sut.tableView)
-    }
-    
-    func test_whenHomeViewControllerLoads_whenViewModelReturnsData_numberOfRowsMethodShouldBeCalledOnce() {
-        // given
-        let sut = HomeViewController(dataSource: dataSourceSpy, viewModel: viewModelSpy)
-        
-        // when
-        _ = sut.view
-        
-        // then
-        XCTAssertEqual(dataSourceSpy.numberOfRowsCallCount, 1)
     }
     
     func test_whenUpdateTableViewIsCalled_dataSourceObjectShouldReceiveHomeViewControllersData() {
@@ -79,6 +67,7 @@ final class HomeViewControllerTests: XCTestCase {
         let numberOfRows = sut.tableView.numberOfRows(inSection: 0)
         XCTAssertEqual(numberOfRows, 0)
     }
+
     
     func test_tableView_whenViewModelReturnsData_numberOfSectionsShouldBeOne() {
         // given
@@ -110,7 +99,7 @@ final class HomeViewControllerTests: XCTestCase {
     
     func test_tableView_whenViewModelReturnsData_cellShouldBeAHomeTableViewCell() {
         // given
-        let sut = HomeViewController(dataSource: dataSource, viewModel: viewModelSpy)
+        let sut = HomeViewController(viewModel: viewModelSpy)
         let persons: [Person] = [.fixture(), .fixture(), .fixture()]
         viewModelSpy.dataToBeReturned = persons
         
@@ -120,6 +109,24 @@ final class HomeViewControllerTests: XCTestCase {
         let cell = sut.tableView.cellForRow(at: indexPath)
         
         // then
-        XCTAssertEqual(cell?.reuseIdentifier, HomeTableViewCell.identifier)
+        XCTAssertEqual(cell?.reuseIdentifier, "HomeTableViewCell")
+    }
+    
+    func test_tableView_whenViewModelReturnsData_cellLabelTextShouldShowPersonInfo() {
+        // given
+        let sut = HomeViewController(viewModel: viewModelSpy)
+        let persons: [Person] = [.fixture(name: "Leo Cunha", age: 27, height: 1.81), .fixture(), .fixture()]
+        viewModelSpy.dataToBeReturned = persons
+        
+        // when
+        _ = sut.view
+        let indexPath = IndexPath(row: 0, section: 0)
+        guard let cell = sut.homeTableViewDataSource.tableView(sut.tableView, cellForRowAt: indexPath) as? HomeTableViewCell else {
+            XCTFail("Could not create cell as HomeTableViewCell")
+            return
+        }
+        
+        // then
+        XCTAssertEqual(cell.labelCell.text, "Name: Leo Cunha, Age: 27, Height: 1.81")
     }
 }

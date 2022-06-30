@@ -47,7 +47,7 @@ class HomeViewController: UIViewController, UITableViewDelegate {
                            forCellReuseIdentifier: HomeTableViewCell.identifier)
     }
     
-    private func getPersons() {
+    func getPersons() {
         viewModel.getPersons { persons in
             self.homeTableViewDataSource.persons = persons
             self.tableView.reloadData()
