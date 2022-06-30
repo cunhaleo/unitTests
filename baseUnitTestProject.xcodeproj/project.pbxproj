@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC0C4079286A3C770013BA8A /* HomeTableViewDataSourceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C40712869F1F00013BA8A /* HomeTableViewDataSourceSpy.swift */; };
 		FC2D46D1286C9C4000B424F0 /* Person+Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46D0286C9C4000B424F0 /* Person+Fixture.swift */; };
 		FC2D46D4286C9C5000B424F0 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46D3286C9C5000B424F0 /* Person.swift */; };
 		FC2D46D8286CBF1700B424F0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D46D7286CBF1700B424F0 /* HomeViewModel.swift */; };
@@ -35,7 +34,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FC0C40712869F1F00013BA8A /* HomeTableViewDataSourceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewDataSourceSpy.swift; sourceTree = "<group>"; };
 		FC2D46D0286C9C4000B424F0 /* Person+Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+Fixture.swift"; sourceTree = "<group>"; };
 		FC2D46D3286C9C5000B424F0 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		FC2D46D5286CB02C00B424F0 /* HomeViewModelSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelSpy.swift; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				FC2D46D5286CB02C00B424F0 /* HomeViewModelSpy.swift */,
-				FC0C40712869F1F00013BA8A /* HomeTableViewDataSourceSpy.swift */,
 				FC2D46E2286CDB8400B424F0 /* HomeViewControllerTests.swift */,
 				FC2D46DE286CDB6A00B424F0 /* HomeViewControllerTests.swift */,
 			);
@@ -310,7 +307,6 @@
 			files = (
 				FC2D46E3286CDB8400B424F0 /* HomeViewControllerTests.swift in Sources */,
 				FC2D46DF286CDB6A00B424F0 /* HomeViewControllerTests.swift in Sources */,
-				FC0C4079286A3C770013BA8A /* HomeTableViewDataSourceSpy.swift in Sources */,
 				FC2D46D9286CC12200B424F0 /* HomeViewModelSpy.swift in Sources */,
 				FC2D46D1286C9C4000B424F0 /* Person+Fixture.swift in Sources */,
 			);

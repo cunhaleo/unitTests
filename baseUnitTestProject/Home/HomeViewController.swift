@@ -7,23 +7,16 @@
 
 import UIKit
 
-protocol HomeTableViewDataSourceProtocol: UITableViewDataSource {
-    var persons: [Person]? { get set }
-}
-
 class HomeViewController: UIViewController, UITableViewDelegate {
     // MARK: Properties
     var persons: [Person]?
-    let homeTableViewDataSource: HomeTableViewDataSourceProtocol
     let viewModel: HomeViewModelProtocol
 
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Initialization
-    init(dataSource: HomeTableViewDataSourceProtocol = HomeTableViewDataSource(),
-         viewModel: HomeViewModelProtocol = HomeViewModel()) {
-        self.homeTableViewDataSource = dataSource
+    init(viewModel: HomeViewModelProtocol = HomeViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,22 +35,21 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     // MARK: Methods
     private func setupTableView() {
         tableView.delegate = self
-        tableView.dataSource = homeTableViewDataSource
+        tableView.dataSource = self
         tableView.register(UINib(nibName: HomeTableViewCell.identifier, bundle: nil),
                            forCellReuseIdentifier: HomeTableViewCell.identifier)
     }
     
-    func getPersons() {
+    private func getPersons() {
         viewModel.getPersons { persons in
-            self.homeTableViewDataSource.persons = persons
+            self.persons = persons
             self.tableView.reloadData()
         }
     }
 }
 
-// MARK: TableViewDataSource Object
-final class HomeTableViewDataSource: NSObject, HomeTableViewDataSourceProtocol {
-    var persons: [Person]?
+// MARK: Extension
+extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         persons?.count ?? 0
