@@ -23,6 +23,7 @@
 		FCB37868286E0AD50044B4A3 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB37866286E0AD50044B4A3 /* DetailsViewController.swift */; };
 		FCB37869286E0AD50044B4A3 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB37867286E0AD50044B4A3 /* DetailsViewController.xib */; };
 		FCB3786C286E0FD80044B4A3 /* NavigationControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3786B286E0FD80044B4A3 /* NavigationControllerSpy.swift */; };
+		FCB3786E286E27BD0044B4A3 /* OldHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB3786D286E27BD0044B4A3 /* OldHomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		FCB37866286E0AD50044B4A3 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		FCB37867286E0AD50044B4A3 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
 		FCB3786B286E0FD80044B4A3 /* NavigationControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerSpy.swift; sourceTree = "<group>"; };
+		FCB3786D286E27BD0044B4A3 /* OldHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldHomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,11 +77,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FC0C4074286A1B160013BA8A /* Util */ = {
+		FC0C4074286A1B160013BA8A /* HomeViewControllerBeforeInit */ = {
 			isa = PBXGroup;
 			children = (
+				FCB3786D286E27BD0044B4A3 /* OldHomeViewController.swift */,
 			);
-			path = Util;
+			path = HomeViewControllerBeforeInit;
 			sourceTree = "<group>";
 		};
 		FC0C4077286A3C440013BA8A /* HomeViewController */ = {
@@ -129,7 +132,7 @@
 		FC3DF51A2865FAEB00B15B9F /* baseUnitTestProject */ = {
 			isa = PBXGroup;
 			children = (
-				FC0C4074286A1B160013BA8A /* Util */,
+				FC0C4074286A1B160013BA8A /* HomeViewControllerBeforeInit */,
 				FC3DF54C2866083A00B15B9F /* Resources */,
 				FC3DF54B2866083200B15B9F /* Sources */,
 				FCB3786A286E0ADF0044B4A3 /* Details */,
@@ -312,6 +315,7 @@
 				FC3DF51C2865FAEB00B15B9F /* AppDelegate.swift in Sources */,
 				FC3DF51E2865FAEB00B15B9F /* SceneDelegate.swift in Sources */,
 				FCB37868286E0AD50044B4A3 /* DetailsViewController.swift in Sources */,
+				FCB3786E286E27BD0044B4A3 /* OldHomeViewController.swift in Sources */,
 				FC3DF53C2866051200B15B9F /* HomeTableViewCell.swift in Sources */,
 				FC3DF5352866029400B15B9F /* HomeViewController.swift in Sources */,
 			);
