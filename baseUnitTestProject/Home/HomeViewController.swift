@@ -48,8 +48,8 @@ final class HomeViewController: UIViewController {
     }
 }
 
-// MARK: Data Source
-extension HomeViewController: UITableViewDataSource {
+// MARK: Extensions
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         persons?.count ?? 0
     }
@@ -61,10 +61,7 @@ extension HomeViewController: UITableViewDataSource {
         cell.setupCell(with: person)
         return cell
     }
-}
-
-// MARK: Delegate
-extension HomeViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let person = persons?[indexPath.row] {
             let detailsViewController = DetailsViewController(person: person)
@@ -72,3 +69,4 @@ extension HomeViewController: UITableViewDelegate {
         }
     }
 }
+
