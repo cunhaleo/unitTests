@@ -26,11 +26,3 @@ final class HomeViewModel: HomeViewModelProtocol {
         }
     }
 }
-
-final class HomeViewModelMock: HomeViewModelProtocol {
-    
-    func getPersons(completion: @escaping (([Person]?) -> Void)) {
-        let data: [Person] = [Person(name: "leo", age: 27, height: 1.81), Person(name: "Marina", age: 29, height: 1.68), Person(name: "Ivana", age: 56, height: 1.72)]
-        completion(data)
-    }
-}
